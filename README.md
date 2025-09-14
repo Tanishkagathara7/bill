@@ -101,8 +101,8 @@ A comprehensive web-based solution for managing retail operations, designed spec
    ```
 
 4. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
+   - Frontend: [http://localhost:3000], https://biiling-stock-mangement-9wfj.vercel.app/
+   - Backend API: http://localhost:5000, https://biiling-stock-mangement.onrender.com
 
 ## 🏗️ Project Structure
 
@@ -216,7 +216,7 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support and questions:
-- 📧 Email: your-email@example.com
+- 📧 Email: ragraichura12@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/your-username/billing-stock-management/issues)
 - 📚 Documentation: [Wiki](https://github.com/your-username/billing-stock-management/wiki)
 
