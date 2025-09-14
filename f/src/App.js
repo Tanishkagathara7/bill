@@ -28,7 +28,7 @@ import {
 } from './utils/userManager';
 import { productsApi, billsApi } from './utils/mockApi';
 
-const API_BASE_URL = 'https://proo-dg52.onrender.com/api';
+const API_BASE_URL = 'https://biiling-stock-mangement.onrender.com/api';
 const MAX_RETRIES = 3;
 
 const PRODUCT_CATEGORIES = [
