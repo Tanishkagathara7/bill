@@ -2416,6 +2416,7 @@ const BillForm = ({ bill, products, bills, onClose, onSave }) => {
   };
 
   // Pure validation for button disabling (does NOT set state)
+  // eslint-disable-next-line no-unused-vars
   const isFormValid = () => {
     // Allow button to be enabled if at least items are added
     if (!formData.items || formData.items.length === 0) return false;
@@ -2440,6 +2441,7 @@ const BillForm = ({ bill, products, bills, onClose, onSave }) => {
     return Object.keys(errors).length === 0;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleNextStep = () => {
     console.log('handleNextStep called, current step:', step);
     if (validateStep(step)) {
