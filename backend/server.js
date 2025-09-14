@@ -122,6 +122,21 @@ const billSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', productSchema);
 const Bill = mongoose.model('Bill', billSchema);
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    message: '🎉 Billing & Stock Management API is running!',
+    status: 'success',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      products: '/api/products',
+      bills: '/api/bills',
+      dashboard: '/api/dashboard/stats'
+    },
+    version: '1.0.0'
+  });
+});
+
 // Product Routes
 
 // Get all products
