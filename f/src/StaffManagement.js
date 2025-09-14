@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   UserPlus, Users, Edit, Trash2, Eye, EyeOff, 
-  AlertCircle, CheckCircle, Search, Settings,
+  AlertCircle, Search,
   Mail, Calendar, Shield, UserCheck
 } from 'lucide-react';
 import { 
@@ -28,10 +28,16 @@ const StaffManagement = ({ currentUser, darkMode }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (currentUser?.id) {
-      loadStaffData();
-      loadOrganizationStats();
-    }
+    const loadData = () => {
+      if (currentUser?.id) {
+        const staffList = getOwnerStaff(currentUser.id);
+        setStaff(staffList);
+        const stats = getOrganizationStats(currentUser.id);
+        setOrganizationStats(stats);
+      }
+    };
+    
+    loadData();
   }, [currentUser?.id]);
 
   const loadStaffData = () => {

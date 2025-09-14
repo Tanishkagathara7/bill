@@ -17,8 +17,6 @@ const simulateDelay = (ms = API_DELAY) => {
 };
 
 // Generate unique IDs
-let productCounter = 1;
-let billCounter = 1;
 
 const getNextProductId = (userId) => {
   const products = getUserProducts(userId);

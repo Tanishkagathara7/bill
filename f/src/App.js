@@ -22,14 +22,12 @@ import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
 import StaffManagement from './StaffManagement';
 import { 
-  getCurrentUser, setCurrentUser, signOutUser, USER_ROLES, isOwner,
+  getCurrentUser, signOutUser, USER_ROLES,
   getUserProducts, setUserProducts, getUserBills, setUserBills, 
-  getUserStats, updateUserStats, initializeUserData, getAllUsersStats
+  getUserStats, updateUserStats
 } from './utils/userManager';
 import { productsApi, billsApi } from './utils/mockApi';
 
-const API_BASE_URL = 'https://biiling-stock-mangement.onrender.com/api';
-const MAX_RETRIES = 3;
 
 const PRODUCT_CATEGORIES = [
   'Spices & Masalas',
@@ -55,9 +53,6 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
-  const [productRetries, setProductRetries] = useState(0);
-  const [billRetries, setBillRetries] = useState(0);
-  const [statsRetries, setStatsRetries] = useState(0);
   const [viewingBill, setViewingBill] = useState(null);
   
   // Authentication state
@@ -166,7 +161,6 @@ const App = () => {
       const userProducts = getUserProducts(currentUser.id);
       setProducts(userProducts);
       setToast(null);
-      setProductRetries(0);
     } catch (error) {
       setToast({ message: `Error loading products: ${error.message}`, type: 'error' });
     } finally {
@@ -181,7 +175,6 @@ const App = () => {
       const userBills = getUserBills(currentUser.id);
       setBills(userBills);
       setToast(null);
-      setBillRetries(0);
     } catch (error) {
       setToast({ message: `Error loading bills: ${error.message}`, type: 'error' });
     }
@@ -194,7 +187,6 @@ const App = () => {
       const userStats = getUserStats(currentUser.id);
       setStats(userStats);
       setToast(null);
-      setStatsRetries(0);
     } catch (error) {
       setToast({ message: `Error loading stats: ${error.message}`, type: 'error' });
     }

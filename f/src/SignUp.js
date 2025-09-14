@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Package, Eye, EyeOff, AlertCircle, CheckCircle, UserPlus } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, UserPlus } from 'lucide-react';
 import { registerUser, USER_ROLES, validateEmail, validatePassword } from './utils/userManager';
 
 const SignUp = ({ onSignUp, onSwitchToSignIn, darkMode }) => {
