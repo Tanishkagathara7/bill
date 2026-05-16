@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Settings as SettingsIcon, Save, Zap, CheckCircle, Users, Sparkles, Eye, EyeOff, ExternalLink, Key } from 'lucide-react';
+import { Save, Zap, CheckCircle, Users, Sparkles, Eye, EyeOff, ExternalLink, Key } from 'lucide-react';
 import { getSettings, saveSettings } from '../utils/settings';
-import { getAiConfig, saveAiConfig, AI_PROVIDERS, AI_MODELS, isAiEnabled, sendAiMessage, buildDataContext } from '../utils/aiService';
+import { getAiConfig, saveAiConfig, AI_PROVIDERS, AI_MODELS, sendAiMessage } from '../utils/aiService';
 import { useApp } from '../context/AppContext';
 import { getOwnerStaff, USER_ROLES } from '../utils/userManager';
 

@@ -89,8 +89,8 @@ export default function Dashboard({ setActiveTab }) {
   const topProducts = useMemo(() => getTopProducts(bills, products), [bills, products]);
   const categoryData = useMemo(() => getCategoryData(bills, products), [bills, products]);
   const recentBills = useMemo(() => [...bills].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5), [bills]);
-  const insights = useMemo(() => generateInsights(products, bills).slice(0, 3), [products, bills, refreshKey]);
-  const aiSummary = useMemo(() => generateDailySummary(products, bills, currentUser?.name?.split(' ')[0] || 'Meera'), [products, bills, currentUser, refreshKey]);
+  const insights = useMemo(() => generateInsights(products, bills).slice(0, 3), [products, bills]);
+  const aiSummary = useMemo(() => generateDailySummary(products, bills, currentUser?.name?.split(' ')[0] || 'Meera'), [products, bills, currentUser]);
 
   const firstName = currentUser?.name?.split(' ')[0] || 'Meera';
 

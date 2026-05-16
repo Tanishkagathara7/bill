@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, Bell, Sun, Moon, Menu, LogOut, Settings, User, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Search, Bell, Sun, Moon, Menu, LogOut, Settings, AlertTriangle, CheckCircle } from 'lucide-react';
 
 const PAGE_TITLES = {
   dashboard: 'Dashboard',
@@ -17,7 +17,7 @@ const PAGE_TITLES = {
 export default function TopNav({ activeTab, setActiveTab, currentUser, onSignOut, darkMode, setDarkMode, onMenuClick, products = [], notifications = [] }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
+  const [searchFocused, _setSearchFocused] = useState(false);
   const userMenuRef = useRef(null);
   const notifRef = useRef(null);
 

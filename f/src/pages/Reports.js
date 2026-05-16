@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { BarChart2, Download, Calendar, TrendingUp, ShoppingCart, IndianRupee, Package } from 'lucide-react';
+import { Download, Calendar, TrendingUp, ShoppingCart, IndianRupee, Package } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import RevenueChart from '../components/charts/RevenueChart';
 import TopProductsChart from '../components/charts/TopProductsChart';

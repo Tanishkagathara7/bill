@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, ShoppingCart, Package, Warehouse,
-  ClipboardList, FileText, BarChart2, Sparkles, Settings,
-  ChevronLeft, ChevronRight, Zap, LogOut, Users, X,
-  ChevronDown, User as UserIcon
+  ClipboardList, BarChart2, Sparkles, Settings,
+  ChevronRight, Zap, LogOut, Users, X,
+  ChevronDown
 } from 'lucide-react';
 import { USER_ROLES } from '../../utils/userManager';
 

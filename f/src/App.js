@@ -19,9 +19,9 @@ import AIInsights from './pages/AIInsights';
 import Settings from './pages/Settings';
 
 // Utils
-import { getUserProducts, getUserBills, getCurrentUser, setCurrentUser, authenticateUser, signOutUser, USER_ROLES } from './utils/userManager';
+import { getCurrentUser, setCurrentUser, authenticateUser, signOutUser, USER_ROLES } from './utils/userManager';
 import { productsApi, billsApi } from './utils/mockApi';
-import { getSettings, saveSettings } from './utils/settings';
+import { getSettings } from './utils/settings';
 
 // Staff Management (keep existing for now, wrapped inside Settings)
 import StaffManagement from './StaffManagement';

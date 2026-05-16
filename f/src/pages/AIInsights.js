@@ -1,24 +1,24 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
-  Sparkles, RefreshCw, TrendingUp, AlertTriangle, Info,
+  Sparkles, TrendingUp, AlertTriangle, Info,
   Zap, Send, Bot, User, Settings2, ExternalLink, Loader2,
-  MessageSquare, BarChart3, ChevronRight
+  ChevronRight
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { generateInsights, generateDailySummary } from '../utils/aiEngine';
 import {
-  sendAiMessage, generateAiSummary, buildDataContext,
+  sendAiMessage, buildDataContext,
   isAiEnabled, getAiConfig, AI_PROVIDERS
 } from '../utils/aiService';
 import { billsApi, productsApi } from '../utils/mockApi';
 
-// ── Insight type config ───────────────────────────────────────────────────────
+/*
 const TYPE_CONFIG = {
   critical: { border: 'border-red-200 dark:border-red-800/50', bg: 'bg-red-50 dark:bg-red-950/20', icon: AlertTriangle, iconColor: 'text-red-500', titleColor: 'text-red-900 dark:text-red-200' },
   warning:  { border: 'border-amber-200 dark:border-amber-800/50', bg: 'bg-amber-50 dark:bg-amber-950/20', icon: AlertTriangle, iconColor: 'text-amber-500', titleColor: 'text-amber-900 dark:text-amber-200' },
   positive: { border: 'border-emerald-200 dark:border-emerald-800/50', bg: 'bg-emerald-50 dark:bg-emerald-950/20', icon: TrendingUp, iconColor: 'text-emerald-500', titleColor: 'text-emerald-900 dark:text-emerald-200' },
   info:     { border: 'border-blue-200 dark:border-blue-800/50', bg: 'bg-blue-50 dark:bg-blue-950/20', icon: Info, iconColor: 'text-blue-500', titleColor: 'text-blue-900 dark:text-blue-200' },
 };
+*/
 
 // ── Suggested prompts ─────────────────────────────────────────────────────────
 const SUGGESTED = [

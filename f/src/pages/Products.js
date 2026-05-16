@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Plus, Search, Edit2, Trash2, Package, AlertTriangle, X, Check, ChevronUp, ChevronDown } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Package, X, Check, ChevronUp, ChevronDown } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { productsApi } from '../utils/mockApi';
 import { formatCurrency } from '../utils/settings';
