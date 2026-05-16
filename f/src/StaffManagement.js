@@ -197,14 +197,14 @@ const StaffManagement = ({ currentUser, darkMode }) => {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-100">
+      <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800/80 rounded-xl p-6 border border-purple-100 dark:border-slate-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <div className="mb-4 lg:mb-0">
-            <h2 className="text-4xl font-bold text-gray-900 mb-2 flex items-center">
-              <Users className="h-8 w-8 text-purple-600 mr-3" />
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+              <Users className="h-8 w-8 text-purple-600 dark:text-purple-400 mr-3" />
               Staff Management
             </h2>
-            <p className="text-gray-600">Manage your team members and their access</p>
+            <p className="text-gray-600 dark:text-gray-300">Manage your team members and their access</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <button
@@ -224,29 +224,29 @@ const StaffManagement = ({ currentUser, darkMode }) => {
         {/* Organization Stats */}
         {organizationStats && (
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white rounded-lg p-4 border border-purple-200 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-purple-200 dark:border-slate-700 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Active Staff</p>
-                  <p className="text-2xl font-bold text-purple-600">{organizationStats.totalStaff}</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Active Staff</p>
+                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">{organizationStats.totalStaff}</p>
                 </div>
                 <UserCheck className="h-8 w-8 text-purple-500" />
               </div>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-purple-200 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-purple-200 dark:border-slate-700 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Organization ID</p>
-                  <p className="text-2xl font-bold text-purple-600">#{organizationStats.organizationId}</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Organization ID</p>
+                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">#{organizationStats.organizationId}</p>
                 </div>
                 <Shield className="h-8 w-8 text-purple-500" />
               </div>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-purple-200 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-purple-200 dark:border-slate-700 shadow-sm">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Since</p>
-                  <p className="text-lg font-bold text-purple-600">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Since</p>
+                  <p className="text-lg font-bold text-purple-600 dark:text-purple-400">
                     {new Date(organizationStats.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -258,32 +258,32 @@ const StaffManagement = ({ currentUser, darkMode }) => {
       </div>
 
       {/* Search */}
-      <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 p-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-5 w-5" />
           <input
             type="text"
             placeholder="Search staff members..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+            className="pl-10 pr-4 py-3 w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
           />
         </div>
       </div>
 
       {/* Staff List */}
-      <div className="bg-white rounded-xl shadow-lg border border-gray-100">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">Staff Members ({filteredStaff.length})</h3>
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Staff Members ({filteredStaff.length})</h3>
         </div>
         
         {filteredStaff.length === 0 ? (
           <div className="p-12 text-center">
-            <Users className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <Users className="h-16 w-16 text-gray-300 dark:text-slate-600 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
               {staff.length === 0 ? 'No staff members yet' : 'No staff members match your search'}
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-6">
               {staff.length === 0 
                 ? 'Add your first staff member to get started with team management'
                 : 'Try adjusting your search terms'
@@ -302,19 +302,19 @@ const StaffManagement = ({ currentUser, darkMode }) => {
             )}
           </div>
         ) : (
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-gray-200 dark:divide-slate-700">
             {filteredStaff.map((member) => (
-              <div key={member.id} className="p-6 hover:bg-gray-50 transition-colors">
+              <div key={member.id} className="p-6 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                      <span className="text-purple-600 font-semibold text-lg">
+                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+                      <span className="text-purple-600 dark:text-purple-400 font-semibold text-lg">
                         {member.name.charAt(0).toUpperCase()}
                       </span>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900">{member.name}</h4>
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{member.name}</h4>
+                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center">
                           <Mail className="h-4 w-4 mr-1" />
                           {member.email}
@@ -329,14 +329,14 @@ const StaffManagement = ({ currentUser, darkMode }) => {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleEditStaff(member)}
-                      className="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-all duration-200"
+                      className="p-2 text-gray-400 dark:text-slate-500 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg transition-all duration-200"
                       disabled={isLoading}
                     >
                       <Edit className="h-5 w-5" />
                     </button>
                     <button
                       onClick={() => handleRemoveStaff(member)}
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                      className="p-2 text-gray-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all duration-200"
                       disabled={isLoading}
                     >
                       <Trash2 className="h-5 w-5" />
@@ -351,10 +351,10 @@ const StaffManagement = ({ currentUser, darkMode }) => {
 
       {/* Add/Edit Staff Modal */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-md w-full p-6">
+        <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-70 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-slate-800 rounded-xl max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 {editingStaff ? 'Edit Staff Member' : 'Add Staff Member'}
               </h3>
               <button
@@ -362,7 +362,7 @@ const StaffManagement = ({ currentUser, darkMode }) => {
                   setShowAddForm(false);
                   resetForm();
                 }}
-                className="text-gray-400 hover:text-gray-600 text-2xl"
+                className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-2xl"
                 disabled={isLoading}
               >
                 ×
@@ -370,50 +370,50 @@ const StaffManagement = ({ currentUser, darkMode }) => {
             </div>
 
             {errors.general && (
-              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-2">
+              <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg flex items-center space-x-2">
                 <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-                <span className="text-sm text-red-700">{errors.general}</span>
+                <span className="text-sm text-red-700 dark:text-red-400">{errors.general}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Full Name *
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                    errors.name ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                    errors.name ? 'border-red-300 dark:border-red-600' : 'border-gray-300 dark:border-slate-600'
                   }`}
                   placeholder="Enter staff member's full name"
                   disabled={isLoading}
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
                 )}
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Email Address *
                 </label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
+                  className={`w-full px-3 py-2 border dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                    errors.email ? 'border-red-300 dark:border-red-600' : 'border-gray-300 dark:border-slate-600'
                   }`}
                   placeholder="Enter staff member's email"
                   disabled={isLoading}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
                 )}
               </div>
 
@@ -421,7 +421,7 @@ const StaffManagement = ({ currentUser, darkMode }) => {
               {!editingStaff && (
                 <>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Password *
                     </label>
                     <div className="relative">
@@ -429,8 +429,8 @@ const StaffManagement = ({ currentUser, darkMode }) => {
                         type={showPassword ? 'text' : 'password'}
                         value={formData.password}
                         onChange={(e) => handleInputChange('password', e.target.value)}
-                        className={`w-full px-3 py-2 pr-10 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                          errors.password ? 'border-red-300' : 'border-gray-300'
+                        className={`w-full px-3 py-2 pr-10 border dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                          errors.password ? 'border-red-300 dark:border-red-600' : 'border-gray-300 dark:border-slate-600'
                         }`}
                         placeholder="Create password for staff member"
                         disabled={isLoading}
@@ -438,32 +438,32 @@ const StaffManagement = ({ currentUser, darkMode }) => {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                       >
                         {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                       </button>
                     </div>
                     {errors.password && (
-                      <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                      <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Confirm Password *
                     </label>
                     <input
                       type="password"
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
-                        errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
+                      className={`w-full px-3 py-2 border dark:bg-slate-700 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                        errors.confirmPassword ? 'border-red-300 dark:border-red-600' : 'border-gray-300 dark:border-slate-600'
                       }`}
                       placeholder="Confirm the password"
                       disabled={isLoading}
                     />
                     {errors.confirmPassword && (
-                      <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                      <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.confirmPassword}</p>
                     )}
                   </div>
                 </>
@@ -477,7 +477,7 @@ const StaffManagement = ({ currentUser, darkMode }) => {
                     setShowAddForm(false);
                     resetForm();
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700"
                   disabled={isLoading}
                 >
                   Cancel

@@ -30,9 +30,9 @@ const initializeDefaultOwner = () => {
   if (users.length === 0) {
     const defaultOwner = {
       id: 1,
-      email: 'owner@provisionstore.com',
-      password: 'admin123', // In production, this should be hashed
-      name: 'Store Owner',
+      email: 'owner@quickbill.in',
+      password: 'owner123', // In production, this should be hashed
+      name: 'Meera',
       role: USER_ROLES.OWNER,
       organizationId: 1, // Owner creates their own organization
       ownerId: null, // Owners don't have an owner
@@ -499,42 +499,31 @@ export const setUserProducts = (userId, products) => {
   return setUserData(userId, DATA_TYPES.PRODUCTS, products);
 };
 
-// Get user's bills (owners see all organization bills, staff see only their own)
+// Get user's bills (owners and staff see all organization bills)
 export const getUserBills = (userId) => {
   const user = getAllUsers().find(u => u.id === userId);
   if (!user) return [];
   
-  // If user is owner, get all bills from their organization (their own + all staff bills)
-  if (user.role === USER_ROLES.OWNER) {
-    const allUsers = getAllUsers();
-    const organizationUsers = allUsers.filter(u => 
-      u.organizationId === user.organizationId && u.isActive
-    );
-    
-    let allBills = [];
-    organizationUsers.forEach(orgUser => {
-      const userBills = getUserData(orgUser.id, DATA_TYPES.BILLS);
-      // Add creator info to each bill
-      const billsWithCreator = userBills.map(bill => ({
-        ...bill,
-        createdBy: orgUser.name,
-        createdByRole: orgUser.role,
-        createdById: orgUser.id
-      }));
-      allBills = allBills.concat(billsWithCreator);
-    });
-    
-    return allBills;
-  }
+  // Get all bills from their organization
+  const allUsers = getAllUsers();
+  const organizationUsers = allUsers.filter(u => 
+    u.organizationId === user.organizationId && u.isActive
+  );
   
-  // If user is staff, only see their own bills
-  const staffBills = getUserData(userId, DATA_TYPES.BILLS);
-  return staffBills.map(bill => ({
-    ...bill,
-    createdBy: user.name,
-    createdByRole: user.role,
-    createdById: user.id
-  }));
+  let allBills = [];
+  organizationUsers.forEach(orgUser => {
+    const userBills = getUserData(orgUser.id, DATA_TYPES.BILLS);
+    // Add creator info to each bill
+    const billsWithCreator = userBills.map(bill => ({
+      ...bill,
+      createdBy: orgUser.name,
+      createdByRole: orgUser.role,
+      createdById: orgUser.id
+    }));
+    allBills = allBills.concat(billsWithCreator);
+  });
+  
+  return allBills;
 };
 
 // Set user's bills

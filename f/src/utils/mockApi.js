@@ -165,8 +165,8 @@ export const billsApi = {
     const bills = getUserBills(currentUser.id);
     const products = getUserProducts(currentUser.id);
     
-    // Generate bill number
-    const billNumber = `BILL-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    // Preserve caller-supplied billNumber, fall back only if missing
+    const billNumber = billData.billNumber || `QB-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
     
     const newBill = {
       ...billData,
@@ -243,13 +243,20 @@ export const billsApi = {
     
     await simulateDelay();
     const bills = getUserBills(currentUser.id);
-    const updatedBills = bills.filter(b => b.id !== id);
-    
-    if (bills.length === updatedBills.length) {
-      throw new Error('Bill not found');
+    const bill = bills.find(b => b.id === id);
+
+    if (!bill) throw new Error('Bill not found');
+
+    // Delete from the original creator's storage (handles org-level deletion)
+    const creatorId = bill.createdById || currentUser.id;
+    const creatorBills = getUserData(creatorId, DATA_TYPES.BILLS);
+    const updatedBills = creatorBills.filter(b => b.id !== id);
+
+    if (creatorBills.length === updatedBills.length) {
+      throw new Error('Bill not found in creator storage');
     }
-    
-    setUserBills(currentUser.id, updatedBills);
+
+    setUserData(creatorId, DATA_TYPES.BILLS, updatedBills);
     updateUserStats(currentUser.id);
     
     return { message: 'Bill deleted successfully' };
