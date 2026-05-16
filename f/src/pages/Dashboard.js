@@ -68,7 +68,6 @@ const KpiCard = ({ title, value, subtitle, icon: Icon, color, onClick, trend, tr
 
 export default function Dashboard({ setActiveTab }) {
   const { products, bills, currentUser } = useApp();
-  const [refreshKey, setRefreshKey] = useState(0);
 
   const today = useMemo(() => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; }, []);
   const yesterday = useMemo(() => { const d = new Date(today); d.setDate(d.getDate() - 1); return d; }, [today]);

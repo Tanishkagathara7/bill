@@ -17,7 +17,7 @@ const PAGE_TITLES = {
 export default function TopNav({ activeTab, setActiveTab, currentUser, onSignOut, darkMode, setDarkMode, onMenuClick, products = [], notifications = [] }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [searchFocused, _setSearchFocused] = useState(false);
+  const searchFocused = false;
   const userMenuRef = useRef(null);
   const notifRef = useRef(null);
 

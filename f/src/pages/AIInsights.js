@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
-  Sparkles, TrendingUp, AlertTriangle, Info,
-  Zap, Send, Bot, User, Settings2, ExternalLink, Loader2,
+  Sparkles, Zap, Send, Bot, User, Settings2, ExternalLink, Loader2,
   ChevronRight
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
