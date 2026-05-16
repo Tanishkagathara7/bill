@@ -233,3 +233,5 @@ For support and questions:
 **Made with ❤️ for small businesses and provision stores**
 
 *Transform your retail operations with modern technology!*
+#   b i l l  
+ 
