@@ -1,1 +1,10 @@
-node_modules
+node_modules/
+f/node_modules/
+backend/node_modules/
+build/
+f/build/
+.env
+backend/.env
+f/.env
+.DS_Store
+*.log
