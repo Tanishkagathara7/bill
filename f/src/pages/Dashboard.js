@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
   TrendingUp, TrendingDown, ShoppingCart, Package,
   IndianRupee, AlertTriangle, ArrowRight, Plus,
-  Sparkles, RefreshCw, Eye
+  Sparkles, Eye
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import RevenueChart from '../components/charts/RevenueChart';
@@ -213,7 +213,6 @@ export default function Dashboard({ setActiveTab }) {
               <h3 className="font-semibold text-slate-900 dark:text-slate-100">AI Insights</h3>
             </div>
             <div className="flex gap-1">
-              <button onClick={() => setRefreshKey(k => k + 1)} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"><RefreshCw className="h-3.5 w-3.5" /></button>
               <button onClick={() => setActiveTab('ai-insights')} className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">All <ArrowRight className="h-3 w-3" /></button>
             </div>
           </div>
