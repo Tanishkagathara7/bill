@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit2, Trash2, Package, X, Check, ChevronUp, ChevronDown } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { productsApi } from '../utils/mockApi';
+import { productsApi } from '../utils/api';
 import { formatCurrency } from '../utils/settings';
 
 const CATEGORIES = ['All', 'Grains', 'Dairy', 'Beverages', 'Snacks', 'Spices', 'Personal Care', 'Cleaning', 'Stationery', 'Other'];

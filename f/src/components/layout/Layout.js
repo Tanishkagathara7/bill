@@ -27,8 +27,8 @@ export default function Layout({ children, activeTab, setActiveTab, currentUser,
           products={products}
           notifications={notifications}
         />
-        <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950 scrollbar-thin">
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+        <main className="flex-1 overflow-y-auto scrollbar-thin bg-[#f8f9ff] dark:bg-[#0b1220]">
+          <div className="max-w-[1440px] mx-auto px-6 sm:px-8 py-6">
             {children}
           </div>
         </main>

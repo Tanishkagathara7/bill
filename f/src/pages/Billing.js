@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ShoppingCart, Plus, Minus, Trash2, X, Check, Package, User, CreditCard, Banknote, Smartphone, FileText, MessageCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { billsApi } from '../utils/mockApi';
+import { billsApi } from '../utils/api';
 import { formatCurrency, getSettings, generateInvoiceNumber } from '../utils/settings';
 
 const PAYMENT_METHODS = [

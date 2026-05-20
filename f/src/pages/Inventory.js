@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Warehouse, AlertTriangle, Plus, Search, TrendingDown } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { productsApi } from '../utils/mockApi';
+import { productsApi } from '../utils/api';
 import { formatCurrency } from '../utils/settings';
 
 export default function Inventory() {

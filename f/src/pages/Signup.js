@@ -8,12 +8,8 @@ const FEATURES = [
   { icon: Shield, text: 'Secure & offline-ready' },
 ];
 
-const DEMO_CREDENTIALS = [
-  { role: 'Owner', email: 'owner@quickbill.in', password: 'owner123' },
-  { role: 'Staff', email: 'staff@quickbill.in', password: 'staff123' },
-];
-
-export default function Login({ onLogin, onSwitchToSignup }) {
+export default function Signup({ onSignup, onSwitchToLogin }) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,25 +18,19 @@ export default function Login({ onLogin, onSwitchToSignup }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email.trim() || !password.trim()) {
-      setError('Please enter your email and password.');
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      setError('Please fill in all fields.');
       return;
     }
     setError('');
     setLoading(true);
     try {
-      await onLogin(email.trim(), password);
+      await onSignup({ name, email, password, role: 'Owner' });
     } catch (err) {
-      setError(err.message || 'Invalid credentials. Please try again.');
+      setError(err.message || 'Signup failed. Please try again.');
     } finally {
       setLoading(false);
     }
-  };
-
-  const fillDemo = (cred) => {
-    setEmail(cred.email);
-    setPassword(cred.password);
-    setError('');
   };
 
   return (
@@ -75,13 +65,13 @@ export default function Login({ onLogin, onSwitchToSignup }) {
           <div className="space-y-6">
             <div>
               <h2 className="text-4xl font-bold text-white leading-tight">
-                The smartest way to<br />
+                Start managing your store<br />
                 <span className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">
-                  run your store.
+                  like a pro.
                 </span>
               </h2>
               <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-                Manage inventory, create bills, track customers, and grow your business — all in one place.
+                Join thousands of store owners managing their inventory, bills, and customers efficiently.
               </p>
             </div>
 
@@ -105,7 +95,7 @@ export default function Login({ onLogin, onSwitchToSignup }) {
         <div className="relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-sm">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-slow" />
-            <span className="text-sm text-slate-300">Trusted by store owners across India</span>
+            <span className="text-sm text-slate-300">Free forever for small businesses</span>
           </div>
         </div>
       </div>
@@ -123,30 +113,13 @@ export default function Login({ onLogin, onSwitchToSignup }) {
 
           {/* Header */}
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Welcome back</h2>
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Create an account</h2>
             <p className="mt-2 text-slate-500 dark:text-slate-400">
-              Sign in to your QuickBill account or{' '}
-              <button onClick={onSwitchToSignup} className="text-indigo-600 hover:text-indigo-500 font-medium">
-                create a new account
+              Already have an account?{' '}
+              <button onClick={onSwitchToLogin} className="text-indigo-600 hover:text-indigo-500 font-medium">
+                Sign in
               </button>
             </p>
-          </div>
-
-          {/* Demo credentials */}
-          <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
-            <p className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 uppercase tracking-wider mb-3">Demo Accounts</p>
-            <div className="grid grid-cols-2 gap-2">
-              {DEMO_CREDENTIALS.map(cred => (
-                <button
-                  key={cred.role}
-                  onClick={() => fillDemo(cred)}
-                  className="text-left px-3 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800 hover:border-indigo-400 dark:hover:border-indigo-600 transition-all duration-150 group"
-                >
-                  <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{cred.role}</p>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 font-mono mt-0.5">{cred.email}</p>
-                </button>
-              ))}
-            </div>
           </div>
 
           {/* Form */}
@@ -156,6 +129,19 @@ export default function Login({ onLogin, onSwitchToSignup }) {
                 {error}
               </div>
             )}
+
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="input"
+                placeholder="John Doe"
+                autoComplete="name"
+                required
+              />
+            </div>
 
             <div className="space-y-1">
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Email address</label>
@@ -181,7 +167,7 @@ export default function Login({ onLogin, onSwitchToSignup }) {
                   onChange={e => setPassword(e.target.value)}
                   className="input pr-11"
                   placeholder="••••••••"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   required
                 />
                 <button
@@ -192,21 +178,22 @@ export default function Login({ onLogin, onSwitchToSignup }) {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
+              <p className="text-xs text-slate-500 mt-1">Must be at least 6 characters long.</p>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3 text-base font-semibold"
+              className="btn-primary w-full py-3 text-base font-semibold mt-4"
             >
               {loading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Signing in...
+                  Creating account...
                 </>
               ) : (
                 <>
-                  Sign in
+                  Create Account
                   <ArrowRight className="h-4 w-4" />
                 </>
               )}
@@ -214,7 +201,7 @@ export default function Login({ onLogin, onSwitchToSignup }) {
           </form>
 
           <p className="text-center text-xs text-slate-400 dark:text-slate-500">
-            QuickBill &copy; {new Date().getFullYear()} · Built for Indian retail businesses
+            By creating an account, you agree to our Terms of Service.
           </p>
         </div>
       </div>

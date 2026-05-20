@@ -8,7 +8,7 @@ import {
   sendAiMessage, buildDataContext,
   isAiEnabled, getAiConfig, AI_PROVIDERS
 } from '../utils/aiService';
-import { billsApi, productsApi } from '../utils/mockApi';
+import { billsApi, productsApi } from '../utils/api';
 
 /*
 const TYPE_CONFIG = {

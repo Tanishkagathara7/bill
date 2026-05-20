@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Eye, Trash2, MessageCircle, X, Filter, ShoppingCart } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { billsApi } from '../utils/mockApi';
+import { billsApi } from '../utils/api';
 import { formatCurrency } from '../utils/settings';
 
 const STATUS_OPTS = ['all', 'paid', 'pending', 'partial'];

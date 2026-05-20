@@ -2,9 +2,22 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
+import { protect } from './middleware/authMiddleware.js';
+
+// Load .env variables FIRST — before any process.env access
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Fail fast if the URI is missing — better than a cryptic Mongoose error
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+  console.error('❌  MONGODB_URI is not set. Add it to backend/.env');
+  process.exit(1);
+}
 
 // Middleware
 app.use(cors({
@@ -18,15 +31,21 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(express.json());
 
-// MongoDB Connection
-const MONGODB_URI = 'mongodb+srv://Tanish:Tanish%402005@demo.xnhxs.mongodb.net/provision_store?retryWrites=true&w=majority';
+// Auth Routes
+app.use('/api/auth', authRoutes);
 
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected successfully'))
-.catch(err => console.error('MongoDB connection error:', err));
+// Protect all business routes
+app.use('/api/products', protect);
+app.use('/api/bills', protect);
+app.use('/api/dashboard', protect);
+
+// Mongoose 8+ no longer accepts useNewUrlParser / useUnifiedTopology
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('✅  MongoDB connected successfully'))
+  .catch(err => {
+    console.error('❌  MongoDB connection error:', err.message);
+    process.exit(1); // Don't silently run with no DB
+  });
 
 // Product Schema
 const productSchema = new mongoose.Schema({
@@ -103,6 +122,18 @@ const billSchema = new mongoose.Schema({
   totalAmount: {
     type: Number,
     required: true,
+    min: 0
+  },
+  amountPaid: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  balanceDue: {
+    type: Number,
+    default: function() {
+      return this.totalAmount - (this.amountPaid || 0);
+    },
     min: 0
   },
   paymentStatus: {
@@ -270,14 +301,24 @@ app.put('/api/bills/:id', async (req, res) => {
   }
 });
 
-// Delete bill
+// Delete bill — restores product stock before removing the bill
 app.delete('/api/bills/:id', async (req, res) => {
   try {
-    const bill = await Bill.findByIdAndDelete(req.params.id);
+    const bill = await Bill.findById(req.params.id);
     if (!bill) {
       return res.status(404).json({ message: 'Bill not found' });
     }
-    res.json({ message: 'Bill deleted successfully' });
+
+    // Restore inventory for every line item on this bill
+    for (const item of bill.items) {
+      await Product.findByIdAndUpdate(
+        item.productId,
+        { $inc: { units: item.quantity } } // give stock back
+      );
+    }
+
+    await bill.deleteOne();
+    res.json({ message: 'Bill deleted and stock restored successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

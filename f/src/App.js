@@ -9,6 +9,7 @@ import Layout from './components/layout/Layout';
 
 // Pages
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Inventory from './pages/Inventory';
@@ -19,8 +20,8 @@ import AIInsights from './pages/AIInsights';
 import Settings from './pages/Settings';
 
 // Utils
-import { getCurrentUser, setCurrentUser, authenticateUser, signOutUser, USER_ROLES } from './utils/userManager';
-import { productsApi, billsApi } from './utils/mockApi';
+import { getCurrentUser, setCurrentUser, authenticateUser, registerUser, signOutUser, USER_ROLES } from './utils/userManager';
+import { productsApi, billsApi } from './utils/api';
 import { getSettings } from './utils/settings';
 
 // Staff Management (keep existing for now, wrapped inside Settings)
@@ -30,6 +31,7 @@ function App() {
   // ── Auth state ──────────────────────────────────────────────────────────────
   const [currentUser, setCurrentUserState] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [authView, setAuthView] = useState('login'); // 'login' or 'signup'
 
   // ── App state ───────────────────────────────────────────────────────────────
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -144,11 +146,22 @@ function App() {
     );
   }
 
-  // ── Login screen ────────────────────────────────────────────────────────────
+  // ── Auth screens ────────────────────────────────────────────────────────────
+  const handleSignup = async (userData) => {
+    const result = await registerUser(userData);
+    if (!result.success) throw new Error(result.message || 'Registration failed');
+    setCurrentUser(result.user);
+    setCurrentUserState(result.user);
+  };
+
   if (!currentUser) {
     return (
       <div className={darkMode ? 'dark' : ''}>
-        <Login onLogin={handleLogin} />
+        {authView === 'login' ? (
+          <Login onLogin={handleLogin} onSwitchToSignup={() => setAuthView('signup')} />
+        ) : (
+          <Signup onSignup={handleSignup} onSwitchToLogin={() => setAuthView('login')} />
+        )}
       </div>
     );
   }
