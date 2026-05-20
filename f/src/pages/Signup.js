@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff, Zap, ArrowRight, Package, BarChart2, Users, Shield } from 'lucide-react';
+import { Eye, EyeOff, Zap, ArrowRight, Package, BarChart2, Users, Shield, Sun, Moon } from 'lucide-react';
 
 const FEATURES = [
   { icon: Package, text: 'Real-time inventory management' },
@@ -8,7 +8,7 @@ const FEATURES = [
   { icon: Shield, text: 'Secure & offline-ready' },
 ];
 
-export default function Signup({ onSignup, onSwitchToLogin }) {
+export default function Signup({ onSignup, onSwitchToLogin, darkMode, setDarkMode }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -101,7 +101,16 @@ export default function Signup({ onSignup, onSwitchToLogin }) {
       </div>
 
       {/* ── Right form panel ── */}
-      <div className="flex-1 flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-950">
+      <div className="flex-1 flex items-center justify-center p-6 bg-slate-50 dark:bg-slate-950 relative">
+        
+        {/* Dark mode toggle */}
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="absolute top-6 right-6 p-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm transition-all"
+        >
+          {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </button>
+
         <div className="w-full max-w-md space-y-8 animate-fadeIn">
           {/* Mobile logo */}
           <div className="flex items-center gap-2 lg:hidden">

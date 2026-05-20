@@ -158,9 +158,9 @@ function App() {
     return (
       <div className={darkMode ? 'dark' : ''}>
         {authView === 'login' ? (
-          <Login onLogin={handleLogin} onSwitchToSignup={() => setAuthView('signup')} />
+          <Login onLogin={handleLogin} onSwitchToSignup={() => setAuthView('signup')} darkMode={darkMode} setDarkMode={setDarkMode} />
         ) : (
-          <Signup onSignup={handleSignup} onSwitchToLogin={() => setAuthView('login')} />
+          <Signup onSignup={handleSignup} onSwitchToLogin={() => setAuthView('login')} darkMode={darkMode} setDarkMode={setDarkMode} />
         )}
       </div>
     );
